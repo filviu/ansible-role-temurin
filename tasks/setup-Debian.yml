@@ -1,0 +1,35 @@
+---
+- name: Setup dependencies
+  ansible.builtin.apt:
+    name: apt-transport-https
+    state: present
+    update_cache: true
+
+- name: Setup keyrings folder
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Setup Eclipse Adoptium GPG key
+  ansible.builtin.get_url:
+    url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+    dest: /etc/apt/keyrings/adoptium.asc
+    checksum: "sha1:650a5347a9b74bec34ec0adc5e4ec2456d74172d"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Setup Eclipse Adoptium apt repository
+  ansible.builtin.template:
+    src: "adoptium.list.j2"
+    dest: "/etc/apt/sources.list.d/adoptium.list"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Setup Temurin
+  ansible.builtin.apt:
+    update_cache: true

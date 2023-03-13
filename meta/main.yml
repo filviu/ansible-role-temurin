@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: temurin
+  author: filviu
+  description: Setup Adoptium Temurin JDK using native package manager
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: "2.7"
+
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: EL
+      versions:
+        - "7"
+        - "8"
+
+  galaxy_tags:
+    - openjdk
+    - temurin
+    - adoptium
+
+dependencies: []

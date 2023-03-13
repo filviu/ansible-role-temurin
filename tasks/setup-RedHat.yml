@@ -1,0 +1,9 @@
+---
+
+- name: Setup Eclipse Adoptium yum repository
+  ansible.builtin.template:
+    src: "adoptium.repo.j2"
+    dest: "/etc/yum.repos.d/adoptium.repo"
+    owner: "root"
+    group: "root"
+    mode: "0644"

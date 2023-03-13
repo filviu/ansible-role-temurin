@@ -1,0 +1,14 @@
+---
+
+- name: Setup RHEL specific tasks
+  ansible.builtin.import_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Setup Debian specific tasks
+  ansible.builtin.import_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Setup Temurin
+  ansible.builtin.package:
+    name: "temurin-{{ temurin_jdk_version }}-jdk"
+    state: present
