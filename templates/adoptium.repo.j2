@@ -1,9 +1,9 @@
 [Adoptium]
 name=Adoptium
-{% if ansible_distribution | lower != "rhel" and ansible_distribution | lower != "centos" and ansible_distribution | lower != "fedora" %}
-baseurl=https://packages.adoptium.net/artifactory/rpm/{{ ansible_distribution | lower }}/$releasever/$basearch
+{% if ansible_distribution | lower == "redhat" %}
+baseurl=https://packages.adoptium.net/artifactory/rpm/rhel/{{ ansible_distribution_major_version }}/$basearch
 {% else %}
-baseurl=https://packages.adoptium.net/artifactory/rpm/centos/$releasever/$basearch
+baseurl=https://packages.adoptium.net/artifactory/rpm/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/$basearch
 {% endif %}
 enabled=1
 gpgcheck=1
