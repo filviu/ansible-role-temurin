@@ -33,4 +33,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created by Silviu Vulcan to scratch his own itch.
+This role was created by Silviu Vulcan.
