@@ -8,11 +8,6 @@
   ansible.builtin.import_tasks: setup-deb.yml
   when: ansible_os_family == 'Debian'
 
-- name: Setup Temurin
-  ansible.builtin.package:
-    name: "temurin-{{ temurin_jdk_version }}-jdk"
-    state: present
-
 - name: Setup jvm.sh
   ansible.builtin.template:
     src: "etc/profile.d/jvm.sh.j2"

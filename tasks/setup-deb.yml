@@ -34,6 +34,11 @@
   ansible.builtin.apt:
     update_cache: true
 
+- name: Setup Temurin
+  ansible.builtin.apt:
+    name: "temurin-{{ temurin_jdk_version }}-jdk"
+    state: present
+
 - name: Set this jdk as the default alternative
   community.general.alternatives:
     name: "java"

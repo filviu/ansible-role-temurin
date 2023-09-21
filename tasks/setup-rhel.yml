@@ -8,6 +8,11 @@
     group: "root"
     mode: "0644"
 
+- name: Setup Temurin
+  ansible.builtin.package:
+    name: "temurin-{{ temurin_jdk_version }}-jdk"
+    state: present
+
 - name: Set this jdk as the default alternative
   community.general.alternatives:
     name: "java"
