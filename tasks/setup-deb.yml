@@ -33,3 +33,9 @@
 - name: Setup Temurin
   ansible.builtin.apt:
     update_cache: true
+
+- name: Set this jdk as the default alternative
+  community.general.alternatives:
+    name: "java"
+    path: "/usr/lib/jvm/temurin-{{ temurin_jdk_version }}-jdk-amd64/bin/java"
+  when: temurin_set_default

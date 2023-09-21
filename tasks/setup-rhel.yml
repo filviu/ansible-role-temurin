@@ -7,3 +7,9 @@
     owner: "root"
     group: "root"
     mode: "0644"
+
+- name: Set this jdk as the default alternative
+  community.general.alternatives:
+    name: "java"
+    path: "/usr/lib/jvm/temurin-{{ temurin_jdk_version }}-jdk/bin/java"
+  when: temurin_set_default
