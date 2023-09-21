@@ -24,7 +24,7 @@
 
 - name: Setup Eclipse Adoptium apt repository
   ansible.builtin.template:
-    src: "adoptium.list.j2"
+    src: "etc/apt/sources.list.d/adoptium.list.j2"
     dest: "/etc/apt/sources.list.d/adoptium.list"
     owner: "root"
     group: "root"

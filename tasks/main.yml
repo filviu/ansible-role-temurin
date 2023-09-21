@@ -12,3 +12,21 @@
   ansible.builtin.package:
     name: "temurin-{{ temurin_jdk_version }}-jdk"
     state: present
+
+- name: Setup jvm.sh
+  ansible.builtin.template:
+    src: "etc/profile.d/jvm.sh.j2"
+    dest: "/etc/profile.d/jvm.sh"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: temurin_enable_jvmsh
+
+- name: Set this jdk as the default alternative
+  community.general.alternatives:
+    name: "java"
+    path: "/usr/lib/jvm/temurin-{{ temurin_jdk_version }}-jdk-amd64/bin/java"
+  when: temurin_set_default
+
+# update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_351/bin/java" 1
+# update-alternatives --set java /usr/lib/jvm/jdk1.8.0_351/bin/java

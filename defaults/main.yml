@@ -1,2 +1,8 @@
 ---
 temurin_jdk_version: 17
+
+# create /etc/profile.d/jvm.sh
+temurin_enable_jvmsh: true
+
+# enable the freshly installed version as default
+temurin_set_default: true
