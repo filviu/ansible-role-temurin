@@ -24,7 +24,7 @@
 
 - name: Setup Eclipse Adoptium apt repository
   ansible.builtin.template:
-    src: "adoptium.list.j2"
+    src: "etc/apt/sources.list.d/adoptium.list.j2"
     dest: "/etc/apt/sources.list.d/adoptium.list"
     owner: "root"
     group: "root"
@@ -33,3 +33,14 @@
 - name: Setup Temurin
   ansible.builtin.apt:
     update_cache: true
+
+- name: Setup Temurin
+  ansible.builtin.apt:
+    name: "temurin-{{ temurin_jdk_version }}-jdk"
+    state: present
+
+- name: Set this jdk as the default alternative
+  community.general.alternatives:
+    name: "java"
+    path: "/usr/lib/jvm/temurin-{{ temurin_jdk_version }}-jdk-amd64/bin/java"
+  when: temurin_set_default

@@ -1,14 +1,21 @@
 ---
 
 - name: Setup RHEL specific tasks
-  ansible.builtin.import_tasks: setup-RedHat.yml
+  ansible.builtin.import_tasks: setup-rhel.yml
   when: ansible_os_family == 'RedHat'
 
 - name: Setup Debian specific tasks
-  ansible.builtin.import_tasks: setup-Debian.yml
+  ansible.builtin.import_tasks: setup-deb.yml
   when: ansible_os_family == 'Debian'
 
-- name: Setup Temurin
-  ansible.builtin.package:
-    name: "temurin-{{ temurin_jdk_version }}-jdk"
-    state: present
+- name: Setup jvm.sh
+  ansible.builtin.template:
+    src: "etc/profile.d/jvm.sh.j2"
+    dest: "/etc/profile.d/jvm.sh"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: temurin_enable_jvmsh
+
+# update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_351/bin/java" 1
+# update-alternatives --set java /usr/lib/jvm/jdk1.8.0_351/bin/java
